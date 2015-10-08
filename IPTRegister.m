@@ -11,7 +11,7 @@ close all
 clear
 
 %% Getting DICOM images
-patient=007;
+patient=002;
 [moving,fixed]=dicomOpen(patient);
 moving_resize=imresize(moving,4); % Resize moving image
 
