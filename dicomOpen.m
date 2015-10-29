@@ -22,32 +22,38 @@ addpath(genpath('../../info/DICOM_Samples/Insight_Journal/'));
 switch patient
     case 000
         disp('Training 000')
-        moving = dicomread('training_001/pet/outDICOM/image001.dcm');
+        moving_128 = dicomread('training_001/pet/outDICOM/image001.dcm');
+        moving=imresize(moving_128,4);
         fixed = dicomread('training_001/ct/outDICOM/image001.dcm');                
         
     case 001
         disp('Patient 001')
-        moving = dicomread('patient_001/pet/outDICOM/image001.dcm');
+        moving_128 = dicomread('patient_001/pet/outDICOM/image001.dcm');
+        moving=imresize(moving_128,4);
         fixed = dicomread('patient_001/ct/outDICOM/image001.dcm');                
         
     case 002
         disp('Patient 002')
-        moving = dicomread('patient_002/pet/outDICOM/image001.dcm');
+        moving_128 = dicomread('patient_002/pet/outDICOM/image001.dcm');
+        moving=imresize(moving_128,4);
         fixed = dicomread('patient_002/ct/outDICOM/image001.dcm');
         
     case 005
         disp('Patient 005')
-        moving = dicomread('patient_005/pet/outDICOM/image001.dcm');
+        moving_128 = dicomread('patient_005/pet/outDICOM/image001.dcm');
+        moving=imresize(moving_128,4);
         fixed = dicomread('patient_005/ct/outDICOM/image001.dcm');
         
     case 006
         disp('Patient 006')
-        moving = dicomread('patient_006/pet/outDICOM/image001.dcm');
+        moving_128 = dicomread('patient_006/pet/outDICOM/image001.dcm');
+        moving=imresize(moving_128,4);
         fixed = dicomread('patient_006/ct/outDICOM/image001.dcm');
     
     case 007
         disp('Patient 007')
-        moving = dicomread('patient_007/pet/outDICOM/image001.dcm');
+        moving_128 = dicomread('patient_007/pet/outDICOM/image001.dcm');
+        moving=imresize(moving_128,4);
         fixed = dicomread('patient_007/ct/outDICOM/image001.dcm');
         
     otherwise
