@@ -1,12 +1,11 @@
-function hij = getMIMatrix(image_1,image_2, rows, cols, step)
+function hij = getMIMatrix(image_1,image_2, mv_rows, mv_cols, step)
 
 im1=image_1;
-hij=zeros(rows,cols);
+hij=zeros(mv_rows,mv_cols);
 
-for i=1:step:rows
-    for j=1:step:cols
-        im2=imtranslate(image_2,[j,i]); 
-        %im2=image_2(i:(i+cols-1),j:(j+rows-1));
+for i=1:step:mv_rows
+    for j=1:step:mv_cols
+        im2=imtranslate(image_2,[j,i]);         
         hij(i,j)=MI_GG(im2,im1);
     end
 end
