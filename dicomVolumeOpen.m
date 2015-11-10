@@ -1,6 +1,6 @@
 function [moving, fixed] = dicomVolumeOpen(patient)
 %% dicomVolumeOpen
-% Función que abre imágenes médicas en formato DICOM del repositorio
+% Función que abre volumenes médicas en formato DICOM del repositorio
 % Insight Journal. Solo se le debe pasar el número de paciente. Se debe
 % tener en cuenta que solo se abren volumenes en 3D de PET y CT y no todos los
 % pacientes tienen estos estudios.
@@ -25,8 +25,8 @@ switch patient
         disp('Training 000')
         for p=0:13
                 filename = sprintf('training_001/pet/outDICOM/image%03d.dcm', p);
-                moving_128=dicomread(filename); % Resize moving image
-                moving(:,:,p+1) = imresize(moving_128,4);
+                moving_128=dicomread(filename); 
+                moving(:,:,p+1) = imresize(moving_128,4); % Resize moving image
         end
         for p=0:13
                 filename = sprintf('training_001/ct/outDICOM/image%03d.dcm', 2*p);
@@ -37,8 +37,8 @@ switch patient
         disp('Patient 001')
         for p=0:13
                 filename = sprintf('patient_001/pet/outDICOM/image%03d.dcm', p);
-                moving_128=dicomread(filename); % Resize moving image
-                moving(:,:,p+1) = imresize(moving_128,4);
+                moving_128=dicomread(filename); 
+                moving(:,:,p+1) = imresize(moving_128,4); % Resize moving image
         end
         for p=0:13
                 filename = sprintf('patient_001/ct/outDICOM/image%03d.dcm', 2*p);
@@ -49,8 +49,8 @@ switch patient
         disp('Patient 002')
         for p=0:13
                 filename = sprintf('patient_002/pet/outDICOM/image%03d.dcm', p);
-                moving_128=dicomread(filename); % Resize moving image
-                moving(:,:,p+1) = imresize(moving_128,4);
+                moving_128=dicomread(filename); 
+                moving(:,:,p+1) = imresize(moving_128,4); % Resize moving image
         end
         for p=0:13
                 filename = sprintf('patient_002/ct/outDICOM/image%03d.dcm', 2*p);
@@ -61,8 +61,8 @@ switch patient
         disp('Patient 005')
         for p=0:13
                 filename = sprintf('patient_005/pet/outDICOM/image%03d.dcm', p);
-                moving_128=dicomread(filename); % Resize moving image
-                moving(:,:,p+1) = imresize(moving_128,4);
+                moving_128=dicomread(filename); 
+                moving(:,:,p+1) = imresize(moving_128,4); % Resize moving image
         end
         for p=0:13
                 filename = sprintf('patient_005/ct/outDICOM/image%03d.dcm', 2*p);
@@ -73,8 +73,8 @@ switch patient
         disp('Patient 006')
         for p=0:13
                 filename = sprintf('patient_006/pet/outDICOM/image%03d.dcm', p);
-                moving_128=dicomread(filename); % Resize moving image
-                moving(:,:,p+1) = imresize(moving_128,4);
+                moving_128=dicomread(filename); 
+                moving(:,:,p+1) = imresize(moving_128,4); % Resize moving image
         end
         for p=0:13
                 filename = sprintf('patient_006/ct/outDICOM/image%03d.dcm', 2*p);
@@ -85,8 +85,8 @@ switch patient
         disp('Patient 007')
          for p=0:13
                 filename = sprintf('patient_007/pet/outDICOM/image%03d.dcm', p);
-                moving_128=dicomread(filename); % Resize moving image
-                moving(:,:,p+1) = imresize(moving_128,4);
+                moving_128=dicomread(filename); 
+                moving(:,:,p+1) = imresize(moving_128,4); % Resize moving image
          end
          for p=0:13
                 filename = sprintf('patient_007/ct/outDICOM/image%03d.dcm', 2*p);
