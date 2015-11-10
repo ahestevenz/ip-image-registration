@@ -14,19 +14,19 @@ im2=image_2;
 %im1=gpuArray(image_1); 
 %im2=gpuArray(image_2);
 
-parfor k=1:angle_cols
+for k=1:angle_cols
     im2_rot = imrotate(im2, angle(k),'bilinear','crop'); % Rotate and crop IMAGE2 
     h(:,:,k)=getMIMatrix(im1,im2_rot, mv_rows, mv_cols, step);
 end
 
 [h_max_value, h_index] = max(h(:));
-[dy,dx,angle_index] = ind2sub(size(h),h_index);
+[index_dy,index_dx,angle_index] = ind2sub(size(h),h_index);
 theta=angle(angle_index);
 
 %Rotate and translate with the MI maximal value
 image_rot = imrotate(image_2,theta,'bilinear','crop');
 
-%MASO! SOLO PARA RELLENAR
+%TODO: Sacar este código y hacerlo mejor.
 for i=1:rows
     for j=1:cols
         if (image_rot(i,j)<min(image_2(:)))
@@ -36,6 +36,8 @@ for i=1:rows
 end
 %%%
 
+dx=round(index_dx-mv_cols/2);
+dy=round(index_dy-mv_rows/2);
 image_Reg = imtranslate(image_rot,[dx, dy],'FillValues',min(image_2(:)));
 
 end
