@@ -14,7 +14,7 @@ im2=image_2;
 %im1=gpuArray(image_1); 
 %im2=gpuArray(image_2);
 
-for k=1:angle_cols
+parfor k=1:angle_cols
     im2_rot = imrotate(im2, angle(k),'bilinear','crop'); % Rotate and crop IMAGE2 
     h(:,:,k)=getMIMatrix(im1,im2_rot, mv_rows, mv_cols, step);
 end
