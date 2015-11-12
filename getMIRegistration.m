@@ -10,7 +10,7 @@ h=zeros(mv_rows,mv_cols,angle_cols);
 im1=image_1;
 im2=image_2;
 
-%Get the mutual information matrix
+% Get the mutual information matrix
 parfor k=1:angle_cols
     im2_rot = imrotate(im2, angle(k),'bilinear','crop'); % Rotate and crop IMAGE2 
     h(:,:,k)=getMIMatrix(im1,im2_rot, mv_rows, mv_cols, step);
