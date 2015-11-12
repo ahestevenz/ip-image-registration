@@ -1,4 +1,4 @@
-function [ moving_final, P, mi] = getMetropolisMIRegistration(fixed, moving)
+function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a] = getMetropolisMIRegistration(fixed, moving)
 %GETMETROPOLISMIREGISTRATION Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -11,16 +11,26 @@ MI_0=MI(fixed,moving,'s');
 %% Metropolis algorithm
 
 MI_test=MI_0;
-iterations=10000;
+iterations=5000;
 th_accept=0.5;
 tx_accept=0;
 ty_accept=0;
 
+% Vectors
+th_vec=[];
+tx_vec=[];
+ty_vec=[];
+MI_vec=[];
+th_vec_a=[];
+tx_vec_a=[];
+ty_vec_a=[];
+MI_vec_a=[];
+
 for i=1:iterations;
        
-    th=normrnd(th_accept,2);% Parametro a sortear
-    tx=normrnd(tx_accept,2);% Parametro a sortear
-    ty=normrnd(ty_accept,2);% Parametro a sortear
+    th=normrnd(th_accept,(-7.200000288000011*10^-8)*(i^2) + 2.000000072000003);% Parametro a sortear
+    tx=normrnd(tx_accept,(-7.200000288000011*10^-8)*(i^2) + 2.000000072000003);% Parametro a sortear
+    ty=normrnd(ty_accept,(-7.200000288000011*10^-8)*(i^2) + 2.000000072000003);% Parametro a sortear
     
     % Matrix transformation
     tform = [ cos(th) sin(th) 0
@@ -34,6 +44,16 @@ for i=1:iterations;
     % Current Mutual Information
     MI_curr = MI(fixed,moving_w,'s');
     
+    % Vectors    
+    th_vec(i)=th;
+    tx_vec(i)=tx;
+    ty_vec(i)=ty;
+    MI_vec(i)=MI_curr;
+    th_vec_a(i)=th_accept;
+    tx_vec_a(i)=tx_accept;
+    ty_vec_a(i)=ty_accept;
+    MI_vec_a(i)=MI_test;
+        
     % Check if it is better! 
       if (MI_curr > MI_test)
         th_accept=th;
@@ -49,7 +69,7 @@ idx1 = (image_rot<min(moving(:)));
 image_rot(idx1)=min(moving(:));
 moving_final = imtranslate(image_rot,[tx_accept, ty_accept],'FillValues',min(moving(:)));
 %%%
-P = [th tx ty];
+P = [th_accept tx_accept ty_accept];
 mi = MI_test;
 
 
