@@ -40,6 +40,8 @@ function [moving_reg, optimizer, metric] = imgRegister(moving, fixed, growthfact
 % uses to compute the metric. The results of your registration might not be reproducible when UseAllPixels = 0. This is
 % because imregister selects a random subset of pixels from the images to compute the metric. 
 % The default value for UseAllPixels is 1 (true).
+%
+% Link: http://www.mathworks.com/help/images/examples/registering-multimodal-3-d-medical-images.html
 
 if (growthfactor>0); optimizer.GrowthFactor=growthfactor; end
 if (epsilon>0); optimizer.Epsilon=epsilon; end
