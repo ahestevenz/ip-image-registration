@@ -10,6 +10,9 @@
 close all
 clear
 
+%% Functions
+addpath(genpath('functions/'))
+
 %% Parameters
 step_angle=0.5;
 angle=-45:step_angle:45;

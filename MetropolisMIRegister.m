@@ -10,6 +10,9 @@
 close all
 clear
 
+%% Functions
+addpath(genpath('functions/'))
+
 %% Getting DICOM images
 patient=006;
 [moving_16bit,fixed_16bit]=dicomOpen(patient);

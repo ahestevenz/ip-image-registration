@@ -1,6 +1,5 @@
 function [h, h_max_value,image_Reg, theta,dx,dy] = getMIRegistration(image_1,image_2, angle, step)
 
-addpath(genpath('Functions/'))
 [rows,cols]=size(image_2);
 mv_rows=rows/4;
 mv_cols=cols/4;

@@ -2,9 +2,6 @@ function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec
 %GETMETROPOLISMIREGISTRATION Summary of this function goes here
 %   Detailed explanation goes here
 
-%% Functions
-addpath(genpath('Functions/'))
-
 %% Get Initial Mutual Information
 MI_0=MI(fixed,moving,'s');
 
