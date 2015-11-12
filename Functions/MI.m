@@ -1,5 +1,5 @@
 function M = MI(X,Y,type)
-% function M = MI_GG(X,Y,type)
+% function M = MI(X,Y,type)
 % Compute the mutual information of two images: X and Y, having
 % integer values.
 % 
