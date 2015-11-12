@@ -46,7 +46,7 @@ disp(metric)
 %imshowpair(movingMIReg,movingReg_8bit);
 
 %% Save all matrices
-save(['image_registration_patient_' num2str(patient) '_step_pixel_' num2str(step_pixel) '_step_angle_' num2str(step_angle) '_mi_get_matrix']);
+save(['Output/image_registration_patient_' num2str(patient) '_step_pixel_' num2str(step_pixel) '_step_angle_' num2str(step_angle) '_mi_get_matrix']);
 
 
 
