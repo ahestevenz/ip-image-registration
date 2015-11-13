@@ -14,7 +14,7 @@ clear
 addpath(genpath('functions/'))
 
 %% Getting DICOM images
-patient=006;
+patient=007;
 [moving_16bit,fixed_16bit]=dicomOpen(patient);
 
 %% Convert to 8bit
@@ -28,7 +28,7 @@ fixed_8bit=im2uint8(fixed_16bit);
 % disp(metric)
 
 %% Image Registration Mutual Information
-[ movingMIReg, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a] = getMetropolisMIRegistration(fixed_8bit, moving_8bit);
+[ movingMIReg, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a, iterations] = getMetropolisMIRegistration(fixed_8bit, moving_8bit,2500);
 
 %% Metrics: Graphics
 
@@ -81,7 +81,7 @@ imshowpair(movingMIReg,fixed_8bit);
 % imshowpair(movingMIReg,movingReg_8bit);
 
 %% Save all matrices
-save(['Output/image_registration_patient_' num2str(patient) '_mi_metropolis_algorithm']);
+save(['output/image_registration_patient_' num2str(patient) '_iterations_' num2str(iterations) '_mi_metropolis_algorithm.mat']);
 
 
 

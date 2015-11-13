@@ -1,4 +1,4 @@
-function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a] = getMetropolisMIRegistration(fixed, moving)
+function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a, iterations] = getMetropolisMIRegistration(fixed, moving, max_iterations)
 %GETMETROPOLISMIREGISTRATION Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -8,8 +8,7 @@ MI_0=MI(fixed,moving,'s');
 %% Metropolis algorithm
 
 MI_test=MI_0;
-iterations=5000;
-th_accept=0.5;
+th_accept=0.0175; % degtorad(1)
 tx_accept=0;
 ty_accept=0;
 
@@ -22,12 +21,22 @@ th_vec_a=[];
 tx_vec_a=[];
 ty_vec_a=[];
 MI_vec_a=[];
+MI_vec_derivative_a=[];
+MI_vec_accum_mean_a=[];
 
-for i=1:iterations;
-       
-    th=normrnd(th_accept,(-7.200000288000011*10^-8)*(i^2) + 2.000000072000003);% Parametro a sortear
-    tx=normrnd(tx_accept,(-7.200000288000011*10^-8)*(i^2) + 2.000000072000003);% Parametro a sortear
-    ty=normrnd(ty_accept,(-7.200000288000011*10^-8)*(i^2) + 2.000000072000003);% Parametro a sortear
+% Gaussian Window parameters
+w_radians_a=-(pi/2)*10^-8; 
+w_radians_b=pi/4;
+w_pixels_a=-4*10^-8;
+w_pixels_b=2;
+
+for i=1:max_iterations;
+%while (abs(MI_curr-MI_test)<10)
+    %if (i>max_iterations); break; end;
+    
+    th=normrnd(th_accept,w_radians_a*i+w_radians_b);% 
+    tx=normrnd(tx_accept,w_pixels_a*i+w_pixels_b);% 
+    ty=normrnd(ty_accept,w_pixels_a*i+w_pixels_b);% 
     
     % Matrix transformation
     tform = [ cos(th) sin(th) 0
@@ -50,24 +59,32 @@ for i=1:iterations;
     tx_vec_a(i)=tx_accept;
     ty_vec_a(i)=ty_accept;
     MI_vec_a(i)=MI_test;
+    if (i>1) 
+        MI_vec_derivative_a(i)=MI_vec_a(i)-MI_vec_a(i-1); 
+        MI_vec_accum_mean_a(i)= mean(MI_vec_derivative_a(1:i));
+    end
         
     % Check if it is better! 
-      if (MI_curr > MI_test)
-        th_accept=th;
-        tx_accept=tx;
-        ty_accept=ty;
-        MI_test=MI_curr;                
-      end    
+    if (MI_curr > MI_test)
+      th_accept=th;
+      tx_accept=tx;
+      ty_accept=ty;
+      MI_test=MI_curr;                
+    end    
+%    i=i+1;
 end
 
-%Rotate and translate with the MI maximal value
+%% Rotate and translate with the MI maximal value
 image_rot = imrotate(moving,th_accept,'bilinear','crop');
 idx1 = (image_rot<min(moving(:)));
 image_rot(idx1)=min(moving(:));
 moving_final = imtranslate(image_rot,[tx_accept, ty_accept],'FillValues',min(moving(:)));
-%%%
+
+
+%% Final variables
 P = [th_accept tx_accept ty_accept];
 mi = MI_test;
+iterations = i;
 
 
 end
