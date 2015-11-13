@@ -19,7 +19,7 @@ angle=-45:step_angle:45;
 step_pixel=1;
 
 %% Getting DICOM images
-patient=002;
+patient=007;
 [moving_16bit,fixed_16bit]=dicomOpen(patient);
 
 %% Convert to 8bit
@@ -49,7 +49,7 @@ disp(metric)
 %imshowpair(movingMIReg,movingReg_8bit);
 
 %% Save all matrices
-save(['Output/image_registration_patient_' num2str(patient) '_step_pixel_' num2str(step_pixel) '_step_angle_' num2str(step_angle) '_mi_get_matrix']);
+save(['Output/image_registration_patient_' num2str(patient) '_step_pixel_' num2str(step_pixel) '_step_angle_' num2str(step_angle) '_mi_get_matrix.mat']);
 
 
 
