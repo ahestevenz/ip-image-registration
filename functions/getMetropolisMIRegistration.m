@@ -75,7 +75,7 @@ for i=1:max_iterations;
 end
 
 %% Rotate and translate with the MI maximal value
-image_rot = imrotate(moving,th_accept,'bilinear','crop');
+image_rot = imrotate(moving,radtodeg(th_accept),'bilinear','crop');
 idx1 = (image_rot<min(moving(:)));
 image_rot(idx1)=min(moving(:));
 moving_final = imtranslate(image_rot,[tx_accept, ty_accept],'FillValues',min(moving(:)));
