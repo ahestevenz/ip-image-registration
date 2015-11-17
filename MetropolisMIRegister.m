@@ -28,7 +28,7 @@ fixed_8bit=im2uint8(fixed_16bit);
 % disp(metric)
 
 %% Image Registration Mutual Information
-[ movingMIReg, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a, iterations] = getMetropolisMIRegistration(fixed_8bit, moving_8bit,2500);
+[ movingMIReg, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a, MI_vec_accum_derivative_mean_a, iterations] = getMetropolisMIRegistration(fixed_8bit, moving_8bit, 250);
 
 %% Metrics: Graphics
 

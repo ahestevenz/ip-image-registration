@@ -1,4 +1,4 @@
-function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a, iterations] = getMetropolisMIRegistration(fixed, moving, max_iterations)
+function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a,MI_vec_accum_derivative_mean_a, iterations] = getMetropolisMIRegistration(fixed, moving, points)
 %GETMETROPOLISMIREGISTRATION Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -7,6 +7,10 @@ MI_0=MI(fixed,moving,'s');
 
 %% Metropolis algorithm
 
+% Parameters
+max_iterations=2500;
+
+% Initial values
 MI_test=MI_0;
 th_accept=0.0175; % degtorad(1)
 tx_accept=0;
@@ -29,10 +33,11 @@ w_radians_a=-(pi/2)*10^-8;
 w_radians_b=pi/4;
 w_pixels_a=-4*10^-8;
 w_pixels_b=2;
+i=1;
+valid_points=1;
 
-for i=1:max_iterations;
-%while (abs(MI_curr-MI_test)<10)
-    %if (i>max_iterations); break; end;
+while (valid_points<points)
+    if (i>max_iterations); break; end;
     
     th=normrnd(th_accept,w_radians_a*i+w_radians_b);% 
     tx=normrnd(tx_accept,w_pixels_a*i+w_pixels_b);% 
@@ -59,10 +64,17 @@ for i=1:max_iterations;
     tx_vec_a(i)=tx_accept;
     ty_vec_a(i)=ty_accept;
     MI_vec_a(i)=MI_test;
+    
     if (i>1) 
+        MI_vec_accum_mean_a(i)= mean(MI_vec_a(1:i));
         MI_vec_derivative_a(i)=MI_vec_a(i)-MI_vec_a(i-1); 
-        MI_vec_accum_mean_a(i)= mean(MI_vec_derivative_a(1:i));
-    end
+        MI_vec_accum_derivative_mean_a(i)= mean(MI_vec_derivative_a(1:i));        
+        if (MI_vec_accum_derivative_mean_a(i)<MI_vec_accum_derivative_mean_a(i-1))        
+          valid_points=valid_points+1;          
+        else
+          valid_points=1;
+        end       
+    end        
         
     % Check if it is better! 
     if (MI_curr > MI_test)
@@ -71,7 +83,7 @@ for i=1:max_iterations;
       ty_accept=ty;
       MI_test=MI_curr;                
     end    
-%    i=i+1;
+    i=i+1;
 end
 
 %% Rotate and translate with the MI maximal value
