@@ -28,10 +28,11 @@ fixed_8bit=im2uint8(fixed_16bit);
 % disp(metric)
 
 %% Image Registration Mutual Information
+tic
 [ movingMIReg, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a, MI_vec_accum_derivative_mean_a, iterations] = getMetropolisMIRegistration(fixed_8bit, moving_8bit, 250);
+elapsed_time=toc;
 
 %% Metrics: Graphics
-
 % Accepted
 figure('Name',['Patient ' num2str(patient) ': Parameters accepted']);
 subplot(2,2,1)
@@ -71,8 +72,8 @@ title('Mutual Information')
 %% Registration: Graphics
 % figure('Name',['Patient ' num2str(patient) ': Unregistered images (16bit)']);
 % imshowpair(moving_16bit,fixed_16bit);
-% figure('Name',['Patient ' num2str(patient) ': Unregistered images (8bit)']);
-% imshowpair(moving_8bit,fixed_8bit);
+figure('Name',['Patient ' num2str(patient) ': Unregistered images (8bit)']);
+imshowpair(moving_8bit,fixed_8bit);
 % figure('Name',['Patient ' num2str(patient) ': Registered images with IP Toolbox (8bit)']);
 % imshowpair(movingReg_8bit,fixed_8bit);
 figure('Name',['Patient ' num2str(patient) ': Registered images with Mutual Information (8bit)']);
@@ -81,7 +82,7 @@ imshowpair(movingMIReg,fixed_8bit);
 % imshowpair(movingMIReg,movingReg_8bit);
 
 %% Save all matrices
-save(['output/image_registration_patient_' num2str(patient) '_iterations_' num2str(iterations) '_mi_metropolis_algorithm.mat']);
+save(['output/image_registration_patient_' num2str(patient) '_iterations_' num2str(iterations) '_elapsed_time_' num2str(elapsed_time) '_seconds_mi_metropolis_algorithm.mat']);
 
 
 

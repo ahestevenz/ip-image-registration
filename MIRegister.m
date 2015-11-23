@@ -14,9 +14,9 @@ clear
 addpath(genpath('functions/'))
 
 %% Parameters
-step_angle=0.5;
+step_angle=2;
 angle=-45:step_angle:45;
-step_pixel=1;
+step_pixel=200;
 
 %% Getting DICOM images
 patient=007;
@@ -33,7 +33,9 @@ disp(optimizer)
 disp(metric)
 
 %% Image Registration Mutual Information
+tic
 [h, h_max_value,movingMIReg, theta,dx,dy] = getMIRegistration(fixed_8bit,moving_8bit,angle,step_pixel);
+elapsed_time=toc;
 
 
 %% Graphics
@@ -49,7 +51,7 @@ disp(metric)
 %imshowpair(movingMIReg,movingReg_8bit);
 
 %% Save all matrices
-save(['output/image_registration_patient_' num2str(patient) '_step_pixel_' num2str(step_pixel) '_step_angle_' num2str(step_angle) '_mi_get_matrix.mat']);
+save(['output/image_registration_patient_' num2str(patient) '_step_pixel_' num2str(step_pixel) '_step_angle_' num2str(step_angle) '_elapsed_time_' num2str(elapsed_time) '_seconds_mi_get_matrix.mat']);
 
 
 
