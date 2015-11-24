@@ -13,6 +13,10 @@ clear
 %% Functions
 addpath(genpath('functions/'))
 
+%% Parameters
+plot_metrics=true;
+plot_registered_images=true;
+
 %% Getting DICOM images
 patient=007;
 [moving_16bit,fixed_16bit]=dicomOpen(patient);
@@ -22,10 +26,10 @@ moving_8bit=im2uint8(moving_16bit);
 fixed_8bit=im2uint8(fixed_16bit);
 
 %% MATLAB Image Registration (IP Toolbox)
-% [movingReg_16bit, optimizer, metric] = imgRegister(moving_16bit, fixed_16bit, -1, -1, -1, -1, -1, -1, -1, 'affine');
-% movingReg_8bit=im2uint8(movingReg_16bit);
-% disp(optimizer)
-% disp(metric)
+[movingReg_16bit, optimizer, metric] = imgRegister(moving_16bit, fixed_16bit, -1, -1, -1, -1, -1, -1, -1, 'affine');
+movingReg_8bit=im2uint8(movingReg_16bit);
+disp(optimizer)
+disp(metric)
 
 %% Image Registration Mutual Information
 tic
@@ -33,6 +37,8 @@ tic
 elapsed_time=toc;
 
 %% Metrics: Graphics
+
+if (plot_metrics)
 % Accepted
 figure('Name',['Patient ' num2str(patient) ': Parameters accepted']);
 subplot(2,2,1)
@@ -68,21 +74,23 @@ title('Translation in Y axis')
 subplot(2,2,4)
 plot(MI_vec)
 title('Mutual Information')
+end
 
 %% Registration: Graphics
-% figure('Name',['Patient ' num2str(patient) ': Unregistered images (16bit)']);
-% imshowpair(moving_16bit,fixed_16bit);
+
+if (plot_registered_images)
+figure('Name',['Patient ' num2str(patient) ': Unregistered images (16bit)']);
+imshowpair(moving_16bit,fixed_16bit);
 figure('Name',['Patient ' num2str(patient) ': Unregistered images (8bit)']);
 imshowpair(moving_8bit,fixed_8bit);
-% figure('Name',['Patient ' num2str(patient) ': Registered images with IP Toolbox (8bit)']);
-% imshowpair(movingReg_8bit,fixed_8bit);
+figure('Name',['Patient ' num2str(patient) ': Registered images with IP Toolbox (8bit)']);
+imshowpair(movingReg_8bit,fixed_8bit);
 figure('Name',['Patient ' num2str(patient) ': Registered images with Mutual Information (8bit)']);
 imshowpair(movingMIReg,fixed_8bit);
-% figure('Name',['Patient ' num2str(patient) ': Comparison between two registrations (8bit)']);
-% imshowpair(movingMIReg,movingReg_8bit);
+figure('Name',['Patient ' num2str(patient) ': Comparison between two registrations (8bit)']);
+imshowpair(movingMIReg,movingReg_8bit);
+end
+
 
 %% Save all matrices
 save(['output/image_registration_patient_' num2str(patient) '_iterations_' num2str(iterations) '_elapsed_time_' num2str(elapsed_time) '_seconds_mi_metropolis_algorithm.mat']);
-
-
-
