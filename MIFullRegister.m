@@ -14,9 +14,9 @@ clear
 addpath(genpath('functions/'))
 
 %% Parameters
-step_angle=2;
+step_angle=0.5;
 angle=-45:step_angle:45;
-step_pixel=200;
+step_pixel=1;
 
 %% Plot Parameters
 plot_registered_images=false;
