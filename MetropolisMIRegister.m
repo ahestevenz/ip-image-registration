@@ -16,25 +16,35 @@ addpath(genpath('functions/'))
 %% Parameters
 plot_metrics=true;
 plot_registered_images=true;
+fixed_translate=false;
+dx_tr_fixed=10; % translate the fixed image in X axis (check the fixed_translate flag)
+dy_tr_fixed=10; % translate the fixed image in Y axis (check the fixed_translate flag)
 
 %% Getting DICOM images
-patient=007;
-[moving_16bit,fixed_16bit]=dicomOpen(patient);
+patient=006;
+[moving_16bit, fixed_16bit]=dicomOpen(patient);
+
+%% Translate the fixed image
+if (fixed_translate)
+    fixed_16bit=imtranslate(fixed_16bit,[dx_tr_fixed, dy_tr_fixed],'FillValues',min(fixed_16bit(:)));
+end
 
 %% Convert to 8bit
 moving_8bit=im2uint8(moving_16bit);
 fixed_8bit=im2uint8(fixed_16bit);
 
 %% MATLAB Image Registration (IP Toolbox)
+tic
 [movingReg_16bit, optimizer, metric] = imgRegister(moving_16bit, fixed_16bit, -1, -1, -1, -1, -1, -1, -1, 'affine');
 movingReg_8bit=im2uint8(movingReg_16bit);
 disp(optimizer)
 disp(metric)
+elapsed_time_matlab=toc;
 
 %% Image Registration Mutual Information
 tic
-[ movingMIReg, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a, MI_vec_accum_derivative_mean_a, iterations] = getMetropolisMIRegistration(fixed_8bit, moving_8bit, 250);
-elapsed_time=toc;
+[ movingMIReg, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, iterations] = getMetropolisMIRegistration(fixed_8bit, moving_8bit, 250);
+elapsed_time_metropolis=toc;
 
 %% Metrics: Graphics
 
@@ -93,4 +103,4 @@ end
 
 
 %% Save all matrices
-save(['output/image_registration_patient_' num2str(patient) '_iterations_' num2str(iterations) '_elapsed_time_' num2str(elapsed_time) '_seconds_mi_metropolis_algorithm.mat']);
+save(['output/image_registration_patient_' num2str(patient) '_iterations_' num2str(iterations) '_elapsed_time_' num2str(elapsed_time_metropolis) '_seconds_mi_metropolis_algorithm.mat']);
