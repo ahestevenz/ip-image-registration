@@ -1,4 +1,4 @@
-function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, MI_vec_derivative_a,MI_vec_accum_mean_a,MI_vec_accum_derivative_mean_a, iterations] = getMetropolisMIRegistration(fixed, moving, points)
+function [ moving_final, P, mi, th_vec, tx_vec, ty_vec, MI_vec, th_vec_a, tx_vec_a, ty_vec_a, MI_vec_a, iterations] = getMetropolisMIRegistration(fixed, moving, points)
 %GETMETROPOLISMIREGISTRATION Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -25,8 +25,7 @@ th_vec_a=[];
 tx_vec_a=[];
 ty_vec_a=[];
 MI_vec_a=[];
-MI_vec_derivative_a=[];
-MI_vec_accum_mean_a=[];
+MI_accept_simul=[];
 
 % Gaussian Window parameters
 w_radians_a=-(pi/2)*10^-8; 
@@ -66,23 +65,26 @@ while (valid_points<points)
     MI_vec_a(i)=MI_test;
     
     if (i>1) 
-        MI_vec_accum_mean_a(i)= mean(MI_vec_a(1:i));
-        MI_vec_derivative_a(i)=MI_vec_a(i)-MI_vec_a(i-1); 
-        MI_vec_accum_derivative_mean_a(i)= mean(MI_vec_derivative_a(1:i));        
-        if (MI_vec_accum_derivative_mean_a(i)<MI_vec_accum_derivative_mean_a(i-1))        
+        if (MI_vec_a(i)==MI_vec_a(i-1))
           valid_points=valid_points+1;          
         else
           valid_points=1;
         end       
-    end        
+    end
         
     % Check if it is better! 
-    if (MI_curr > MI_test)
+    if ((MI_curr - MI_test)>= 0)
       th_accept=th;
       tx_accept=tx;
       ty_accept=ty;
-      MI_test=MI_curr;                
+      MI_test=MI_curr;
+    elseif (abs(MI_curr - MI_test)< 0.05) && (exp(-abs(MI_test)*i/20)>rand(1))
+      th_accept=th;
+      tx_accept=tx;
+      ty_accept=ty;
+      MI_test=MI_curr;       
     end    
+    MI_accept_simul(i)=exp(-abs(MI_test)*i/20);
     i=i+1;
 end
 
