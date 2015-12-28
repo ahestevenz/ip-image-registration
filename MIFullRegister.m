@@ -14,15 +14,15 @@ clear
 addpath(genpath('functions/'))
 
 %% Parameters
-step_angle=2;
+step_angle=0.5;
 angle=-45:step_angle:45;
-step_pixel=200;
+step_pixel=1;
 
 %% Plot Parameters
 plot_registered_images=false;
 
 %% Getting DICOM images
-patient=007;
+patient=005;
 [moving_16bit,fixed_16bit]=dicomOpen(patient);
 
 %% Convert to 8bit
