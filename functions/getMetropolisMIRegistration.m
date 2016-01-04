@@ -65,7 +65,7 @@ while (valid_points<points)
     MI_vec_a(i)=MI_test;
     
     if (i>1) 
-        if (MI_vec_a(i)==MI_vec_a(i-1))
+        if (MI_vec_a(i)-MI_vec_a(i-1)<0.005)
           valid_points=valid_points+1;          
         else
           valid_points=1;
@@ -78,13 +78,13 @@ while (valid_points<points)
       tx_accept=tx;
       ty_accept=ty;
       MI_test=MI_curr;
-    elseif (abs(MI_curr - MI_test)< 0.05) && (exp(-abs(MI_test)*i/20)>rand(1))
+    elseif (abs(MI_curr - MI_test)< 0.01) && (exp(-abs(MI_test-MI_curr)*i/20)>rand(1))
       th_accept=th;
       tx_accept=tx;
       ty_accept=ty;
       MI_test=MI_curr;       
     end    
-    MI_accept_simul(i)=exp(-abs(MI_test)*i/20);
+    MI_accept_simul(i)=exp(-abs(MI_test-MI_curr)*i/20);
     i=i+1;
 end
 
