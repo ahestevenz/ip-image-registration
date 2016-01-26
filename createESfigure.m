@@ -18,7 +18,7 @@ box(subplot1,'on');
 hold(subplot1,'all');
 
 % Create plot
-plot(th,'Parent',subplot1);
+plot(th,'Parent',subplot1,'LineWidth',2,'Color',[0 0 1]);
 
 % Create title
 title('Ángulo de rotación','FontWeight','bold','FontSize',20);
@@ -35,7 +35,7 @@ box(subplot2,'on');
 hold(subplot2,'all');
 
 % Create plot
-plot(tx,'Parent',subplot2);
+plot(tx,'Parent',subplot2,'LineWidth',2,'Color',[0 0 1]);
 
 % Create title
 title('Traslación en X','FontWeight','bold','FontSize',20);
@@ -52,7 +52,7 @@ box(subplot3,'on');
 hold(subplot3,'all');
 
 % Create plot
-plot(ty,'Parent',subplot3);
+plot(ty,'Parent',subplot3,'LineWidth',2,'Color',[0 0 1]);
 
 % Create title
 title('Traslación en Y','FontWeight','bold','FontSize',20);
@@ -69,7 +69,7 @@ box(subplot4,'on');
 hold(subplot4,'all');
 
 % Create plot
-plot(mi,'Parent',subplot4);
+plot(mi,'Parent',subplot4,'LineWidth',2,'Color',[0 0 1]);
 
 % Create title
 title('Información mutua','FontWeight','bold','FontSize',20);

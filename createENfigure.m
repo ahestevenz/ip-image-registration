@@ -1,4 +1,4 @@
-function createENfigure(Y1, Y2, Y3, Y4)
+function createENfigure(th, tx, ty, mi)
 %CREATEENFIGURE(th, tx, ty, mi)
 % Create a set of figures with labels in English.
 % Arguments:
@@ -18,7 +18,7 @@ box(subplot1,'on');
 hold(subplot1,'all');
 
 % Create plot
-plot(Y1,'Parent',subplot1,'LineWidth',2);
+plot(th,'Parent',subplot1,'LineWidth',2);
 
 % Create title
 title('Angle of Rotation','FontWeight','bold','FontSize',20);
@@ -35,7 +35,7 @@ box(subplot2,'on');
 hold(subplot2,'all');
 
 % Create plot
-plot(Y2,'Parent',subplot2,'LineWidth',2);
+plot(tx,'Parent',subplot2,'LineWidth',2);
 
 % Create title
 title('Translation in X axis','FontWeight','bold','FontSize',20);
@@ -52,7 +52,7 @@ box(subplot3,'on');
 hold(subplot3,'all');
 
 % Create plot
-plot(Y3,'Parent',subplot3,'LineWidth',2);
+plot(ty,'Parent',subplot3,'LineWidth',2);
 
 % Create title
 title('Translation in Y axis','FontWeight','bold','FontSize',20);
@@ -69,7 +69,7 @@ box(subplot4,'on');
 hold(subplot4,'all');
 
 % Create plot
-plot(Y4,'Parent',subplot4,'LineWidth',2);
+plot(mi,'Parent',subplot4,'LineWidth',2);
 
 % Create title
 title('Mutual Information','FontWeight','bold','FontSize',20);
