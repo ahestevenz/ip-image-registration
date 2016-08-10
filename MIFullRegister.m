@@ -23,7 +23,7 @@ plot_registered_images=false;
 
 %% Getting DICOM images
 patient=005;
-[moving_16bit,fixed_16bit]=dicomOpen(patient);
+[moving_16bit,fixed_16bit]=dicomIJDOpen(patient);
 
 %% Convert to 8bit
 moving_8bit=im2uint8(moving_16bit);

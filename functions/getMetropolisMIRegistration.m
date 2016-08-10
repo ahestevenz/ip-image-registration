@@ -40,7 +40,7 @@ while (valid_points<points)
     
     th=normrnd(th_accept,w_radians_a*i+w_radians_b);% 
     tx=normrnd(tx_accept,w_pixels_a*i+w_pixels_b);% 
-    ty=normrnd(ty_accept,w_pixels_a*i+w_pixels_b);% 
+    ty=normrnd(ty_accept,w_pixels_a*i+w_pixels_b);%
     
     % Matrix transformation
     tform = [ cos(th) sin(th) 0

@@ -21,8 +21,8 @@ dx_tr_fixed=10; % translate the fixed image in X axis (check the fixed_translate
 dy_tr_fixed=10; % translate the fixed image in Y axis (check the fixed_translate flag)
 
 %% Getting DICOM images
-patient=006;
-[moving_16bit, fixed_16bit]=dicomOpen(patient);
+patient=007;
+[moving_16bit, fixed_16bit] = dicomIJDOpen(patient);
 
 %% Translate the fixed image
 if (fixed_translate)
