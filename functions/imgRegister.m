@@ -1,4 +1,4 @@
-function [moving_reg, optimizer, metric] = imgRegister(moving, fixed, growthfactor, epsilon, initialradius, iterations, samples, histogrambins, pixels, type)
+function [moving_reg, optimizer, metric, R_reg] = imgRegister(moving, fixed, growthfactor, epsilon, initialradius, iterations, samples, histogrambins, pixels, type)
 
 %% Metric variables
 [optimizer,metric] = imregconfig('multimodal');
@@ -62,6 +62,6 @@ if (pixels>=0); metric.UseAllPixels=pixels; end
 %
 % The 'similarity' and 'affine' transformation types always involve nonreflective transformations.
 
-moving_reg=imregister(moving, fixed, type, optimizer, metric);
+[moving_reg, R_reg]=imregister(moving, fixed, type, optimizer, metric); 
     
 end
