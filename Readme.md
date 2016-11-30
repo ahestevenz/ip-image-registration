@@ -17,4 +17,6 @@ a partir de la maximización de su información mutua y con transformaciones de 
 
 <p align="center"><img src="https://github.com/ahestevenz/ip-image-registration/blob/master/img/MetropolisMIRegister.png" width="800"></p>
 
+Este trabajo se encuentra publicado en la revista [Proyecciones Vol.14 No. 1](https://www.frba.utn.edu.ar/wp-content/uploads/2016/05/proyecciones-16-v1-new.pdf)
+
 *AR-PET: Primer Tomógrafo por Emsión de Positrones Argentino, C. Verrastro, D. Estryk, E. Venialgo, S. Marinsek, M. Belzunce, XXXV Reunión Anual de la Asociación Argentina de Tecnología Nuclear, Noviembre 2008.
