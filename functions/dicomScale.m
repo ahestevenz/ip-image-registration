@@ -5,11 +5,14 @@ function dicomScale(img_dcm_path, scale)
 %  img_dcm: ruta de la imagen 
 %  scale: tamaño de la escala que se desea transformar
 
-
+%% Open and scale
 disp('Opening...')
 img = dicomread(img_dcm_path);
 disp('Scaling...')
 img_scale=imresize(img,scale,'bilinear');
 disp('To DICOM...')
+
+%% Write DICOM file
 [pathstr,name,ext] = fileparts(img_dcm_path);
 dicomwrite(img_scale,fullfile(pathstr,[name '_scale' ext]));   
+end
