@@ -1,5 +1,5 @@
 function [moving, fixed] = dicomIJDOpen(patient)
-%% dicomOpen
+%% dicomIJDOpen
 % Función que abre imágenes médicas en formato DICOM del repositorio
 % Insight Journal. Solo se le debe pasar el número de paciente. Se debe
 % tener en cuenta que solo se abren imágenes de PET y CT y no todos los
