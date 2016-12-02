@@ -19,4 +19,11 @@ a partir de la maximización de su información mutua y con transformaciones de 
 
 Este trabajo se encuentra publicado en la revista [Proyecciones Vol.14 No. 1](https://www.frba.utn.edu.ar/wp-content/uploads/2016/05/proyecciones-16-v1-new.pdf)
 
+### IPTBNCTRegister
+
+Registración de imágenes utilizando el Image Processing Toolbox. Este *script* tiene como objetivo registrar imágenes radiográficas e histológicas proveniente de muestras correspondientes al proyecto [BNCT](http://www2.cnea.gov.ar/aplicaciones_nucleares/bnct_proyecto.php) del [Centro Atómico Constituyentes](http://www.cnea.gov.ar/como-visitarnos-CAC) de la [CNEA]((http://www.cnea.gov.ar/).
+
+En la figura se muestra el resultado de este *script*.
+
+
 *AR-PET: Primer Tomógrafo por Emsión de Positrones Argentino, C. Verrastro, D. Estryk, E. Venialgo, S. Marinsek, M. Belzunce, XXXV Reunión Anual de la Asociación Argentina de Tecnología Nuclear, Noviembre 2008.
