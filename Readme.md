@@ -21,7 +21,7 @@ Este trabajo se encuentra publicado en la revista [Proyecciones Vol.14 No. 1](ht
 
 ### IPTBNCTRegister
 
-Registración de imágenes utilizando el Image Processing Toolbox. Este *script* tiene como objetivo registrar imágenes radiográficas e histológicas proveniente de muestras correspondientes al proyecto [BNCT](http://www2.cnea.gov.ar/aplicaciones_nucleares/bnct_proyecto.php) del [Centro Atómico Constituyentes](http://www.cnea.gov.ar/como-visitarnos-CAC) de la [CNEA](http://www.cnea.gov.ar/).
+Registración de imágenes utilizando el [Image Processing Toolbox](https://www.mathworks.com/products/image/). Este *script* tiene como objetivo registrar imágenes radiográficas e histológicas proveniente de muestras correspondientes al proyecto [BNCT](http://www2.cnea.gov.ar/aplicaciones_nucleares/bnct_proyecto.php) del [Centro Atómico Constituyentes](http://www.cnea.gov.ar/como-visitarnos-CAC) de la [CNEA](http://www.cnea.gov.ar/).
 
 <p align="center"><img src="https://github.com/ahestevenz/ip-image-registration/blob/master/img/IPTBNCTRegister.png" width="800"></p>
 
