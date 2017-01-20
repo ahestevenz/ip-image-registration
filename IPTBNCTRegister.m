@@ -8,6 +8,7 @@ sample_directory='Muestra_REF_17-10';
 
 %% Funciones
 addpath(genpath('functions/'))
+factor_pix_to_micron = 0.384;
 
 %% Obtengo las imágenes BNCT
 [moving, fixed]=imagesBNCTPairOpen(strcat(absolute_principal_path,'/',sample_directory));
@@ -32,10 +33,13 @@ disp(trasformation_matrix)
 angle=['Angulo de rotación: ',num2str(acos(trasformation_matrix(1)))];
 dx=['Desplazamiento en X: ',num2str(trasformation_matrix(3))];
 dy=['Desplazamiento en Y: ',num2str(trasformation_matrix(6))];
+dx_m=['Desplazamiento en X en micrones: ',num2str(trasformation_matrix(3)/factor_pix_to_micron)];
+dy_m=['Desplazamiento en Y en micrones: ',num2str(trasformation_matrix(6)/factor_pix_to_micron)];
 disp(angle)
 disp(dx)
 disp(dy)
-
+disp(dx_m)
+disp(dy_m)
 
 
 
